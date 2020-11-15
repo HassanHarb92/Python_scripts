@@ -14,7 +14,7 @@ import random
 filename1 = sys.argv[1]
 filename4 = filename1.split(".")
 filename3 = filename4[0]+"-data.txt"
-
+filename5 = filename4[0]+"-geom.txt"
 
 njobs = 0
 n_l9999 = 0
@@ -120,6 +120,22 @@ print('{:<20s}{:>20.7f}'.format("Free Energy",data[4]))
 print('{:<20s}{:>20.7f}'.format("Electronic + ZPE",data[5]))
 print('{:<20s}{:>20.0f}'.format("Imag. Freq",data[0]))
 print('{:<20s}{:>20f}'.format("<S**2>",data[1]))
+
+
+test_counter = 0
+n_lines = 0
+
+with open(filename5,'w') as output:
+  output.write("Geometry info for ")
+  output.write(filename1)
+  output.write("\n")
+  with open(filename3, 'r') as input:
+     for line in input:
+         test_counter = test_counter+1
+         if (line == "\n"):
+              n_lines = n_lines + 1
+         if (n_lines == 3):
+            output.write(line)
 
 os.remove(filename3)
 
